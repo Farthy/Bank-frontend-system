@@ -1,43 +1,40 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:name1",
- "creation": "2024-06-11 12:07:32.734448",
+ "autoname": "P.####",
+ "creation": "2024-06-11 16:28:44.799858",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "name1",
-  "isbn",
-  "author"
+  "penalty_amount",
+  "grace_period",
+  "member"
  ],
  "fields": [
   {
-   "fieldname": "name1",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Name",
-   "reqd": 1,
-   "unique": 1
+   "fieldname": "penalty_amount",
+   "fieldtype": "Currency",
+   "label": "Penalty Amount"
   },
   {
-   "fieldname": "isbn",
-   "fieldtype": "Data",
-   "label": "ISBN"
+   "fieldname": "grace_period",
+   "fieldtype": "Date",
+   "label": "Grace Period"
   },
   {
-   "fieldname": "author",
+   "fieldname": "member",
    "fieldtype": "Link",
-   "label": "Author",
-   "options": "Author"
+   "label": "Member",
+   "options": "Library Members"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-11 16:42:20.805220",
+ "modified": "2024-06-11 16:35:27.944283",
  "modified_by": "Administrator",
  "module": "Library System",
- "name": "Book",
- "naming_rule": "By fieldname",
+ "name": "Library settings",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {

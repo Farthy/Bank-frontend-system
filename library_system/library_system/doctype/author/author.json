@@ -1,7 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "A.###",
+ "autoname": "field:full_name",
  "creation": "2024-06-11 12:17:36.064900",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -29,9 +29,9 @@
   },
   {
    "fieldname": "full_name",
-   "fieldtype": "Data",
+   "fieldtype": "Read Only",
    "label": "Full Name",
-   "read_only": 1
+   "unique": 1
   },
   {
    "fieldname": "email",
@@ -49,11 +49,11 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-11 15:12:19.813626",
+ "modified": "2024-06-11 16:56:46.836102",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Author",
- "naming_rule": "Expression (old style)",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
