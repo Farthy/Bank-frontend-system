@@ -20,6 +20,19 @@ frappe.ui.form.on('Book Issue', {
                 }
             });
         }, __("Actions"));
+
+        frappe.call({
+            method: 'library_system.services.rest.blacklist_user_method',
+            args:{
+                member: frm.doc.member,
+                book_issue_name: frm.doc.book_name
+            },
+            callback: function(r){
+                if(r.message){
+                    frappe.msgprint(r.message);
+                }
+            }
+        })
     }
 });
 
