@@ -6,31 +6,18 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "penalty_amount",
-  "grace_period",
-  "member"
+  "penalty_amount"
  ],
  "fields": [
   {
    "fieldname": "penalty_amount",
    "fieldtype": "Currency",
-   "label": "Penalty Amount"
-  },
-  {
-   "fieldname": "grace_period",
-   "fieldtype": "Date",
-   "label": "Grace Period"
-  },
-  {
-   "fieldname": "member",
-   "fieldtype": "Link",
-   "label": "Member",
-   "options": "Library Members"
+   "label": "Penalty per day"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-11 16:35:27.944283",
+ "modified": "2024-06-12 07:16:20.206284",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Library settings",

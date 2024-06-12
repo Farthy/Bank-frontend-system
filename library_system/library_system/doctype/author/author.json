@@ -1,55 +1,30 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "field:full_name",
- "creation": "2024-06-11 12:17:36.064900",
+ "autoname": "field:name1",
+ "creation": "2024-06-12 07:35:02.023765",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "first_name",
-  "last_name",
-  "full_name",
-  "email",
-  "books"
+  "name1",
+  "biography"
  ],
  "fields": [
   {
-   "fieldname": "first_name",
+   "fieldname": "name1",
    "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "First Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "last_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Last Name",
-   "reqd": 1
-  },
-  {
-   "fieldname": "full_name",
-   "fieldtype": "Read Only",
-   "label": "Full Name",
+   "label": "Name",
    "unique": 1
   },
   {
-   "fieldname": "email",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Email",
-   "reqd": 1
-  },
-  {
-   "fieldname": "books",
-   "fieldtype": "Link",
-   "label": "books",
-   "options": "Book"
+   "fieldname": "biography",
+   "fieldtype": "Small Text",
+   "label": "Biography"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-11 16:56:46.836102",
+ "modified": "2024-06-12 07:37:08.757737",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Author",

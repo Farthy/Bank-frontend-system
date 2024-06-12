@@ -1,69 +1,34 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "format:Date-{MM}-{YY}-{####}",
- "creation": "2024-06-11 12:27:45.927884",
+ "autoname": "BI.###",
+ "creation": "2024-06-12 07:13:13.148921",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "section_break_w0pc",
-  "amended_from",
-  "book_name",
-  "from_date",
-  "to_date",
-  "status",
-  "member",
+  "book",
+  "library_member",
+  "issue_date",
   "return_date",
-  "fine_amount",
-  "fine_status"
+  "extended"
  ],
  "fields": [
   {
-   "fieldname": "section_break_w0pc",
-   "fieldtype": "Section Break"
-  },
-  {
-   "fieldname": "amended_from",
+   "fieldname": "book",
    "fieldtype": "Link",
-   "label": "Amended From",
-   "no_copy": 1,
-   "options": "Book Issue",
-   "print_hide": 1,
-   "read_only": 1,
-   "search_index": 1
-  },
-  {
-   "fieldname": "book_name",
-   "fieldtype": "Link",
-   "label": "Book Name",
+   "label": "Book",
    "options": "Book"
   },
   {
-   "fieldname": "from_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "From Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "to_date",
-   "fieldtype": "Date",
-   "in_list_view": 1,
-   "label": "To Date",
-   "reqd": 1
-  },
-  {
-   "fieldname": "status",
-   "fieldtype": "Select",
-   "label": "Status",
-   "options": "available\noverdue"
-  },
-  {
-   "fieldname": "member",
+   "fieldname": "library_member",
    "fieldtype": "Link",
-   "label": "Member",
-   "options": "Library Members",
-   "reqd": 1
+   "label": "Library Member",
+   "options": "LIbrary Member"
+  },
+  {
+   "fieldname": "issue_date",
+   "fieldtype": "Date",
+   "label": "Issue Date"
   },
   {
    "fieldname": "return_date",
@@ -71,26 +36,20 @@
    "label": "Return Date"
   },
   {
-   "fieldname": "fine_amount",
-   "fieldtype": "Currency",
-   "label": "Fine Amount"
-  },
-  {
-   "default": "Not paid",
-   "fieldname": "fine_status",
-   "fieldtype": "Select",
-   "label": "Fine Status",
-   "options": "Paid\nNot paid"
+   "default": "0",
+   "fieldname": "extended",
+   "fieldtype": "Check",
+   "label": "Extended",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
- "is_submittable": 1,
  "links": [],
- "modified": "2024-06-11 15:07:59.851661",
+ "modified": "2024-06-12 10:11:43.880673",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Book Issue",
- "naming_rule": "Expression",
+ "naming_rule": "Expression (old style)",
  "owner": "Administrator",
  "permissions": [
   {
@@ -103,29 +62,7 @@
    "report": 1,
    "role": "System Manager",
    "share": 1,
-   "submit": 1,
    "write": 1
-  },
-  {
-   "create": 1,
-   "delete": 1,
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "librarian",
-   "share": 1,
-   "write": 1
-  },
-  {
-   "email": 1,
-   "export": 1,
-   "print": 1,
-   "read": 1,
-   "report": 1,
-   "role": "Library Member",
-   "share": 1
   }
  ],
  "sort_field": "creation",

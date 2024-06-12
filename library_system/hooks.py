@@ -123,11 +123,9 @@ app_license = "mit"
 # Hook on document methods and events
 
 # doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-# 	}
+# 	 "Book Issue": {
+#         "before_save": "library_system.services.rest.before_save"
+#     }
 # }
 
 # Scheduled Tasks

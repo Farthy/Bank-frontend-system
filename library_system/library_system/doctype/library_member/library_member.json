@@ -1,21 +1,24 @@
 {
  "actions": [],
  "allow_rename": 1,
- "autoname": "LM.###",
- "creation": "2024-06-11 12:20:55.948741",
+ "autoname": "field:first_name",
+ "creation": "2024-06-12 06:50:21.069189",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
   "first_name",
   "last_name",
-  "full_name",
-  "email"
+  "email",
+  "phone",
+  "penalty",
+  "blacklisted"
  ],
  "fields": [
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
-   "label": "First name"
+   "label": "First Name",
+   "unique": 1
   },
   {
    "fieldname": "last_name",
@@ -23,24 +26,36 @@
    "label": "Last Name"
   },
   {
-   "fieldname": "full_name",
-   "fieldtype": "Data",
-   "in_list_view": 1,
-   "label": "Full Name"
-  },
-  {
    "fieldname": "email",
    "fieldtype": "Data",
    "label": "Email"
+  },
+  {
+   "fieldname": "phone",
+   "fieldtype": "Int",
+   "label": "Phone"
+  },
+  {
+   "fieldname": "penalty",
+   "fieldtype": "Currency",
+   "label": "Penalty",
+   "read_only": 1
+  },
+  {
+   "default": "0",
+   "fieldname": "blacklisted",
+   "fieldtype": "Check",
+   "label": "BlackListed",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-11 13:30:45.149353",
+ "modified": "2024-06-12 09:33:30.657049",
  "modified_by": "Administrator",
  "module": "Library System",
- "name": "Library Members",
- "naming_rule": "Expression (old style)",
+ "name": "LIbrary Member",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {
