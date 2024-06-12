@@ -20,6 +20,25 @@ frappe.ui.form.on('Book Issue', {
         
 
     },
+    validate: function(frm) {
+        frappe.call({
+            method: "library_system.services.rest.is_book_available",
+            args: {
+                docname: frm.doc.book
+            },
+            callback: function(response) {
+                if (response.message === 'available') {
+                    // Book is available
+                    frappe.msgprint('Book is available');
+                    frappe.validated = true;
+                } else {
+                    // Book is not available
+                    frappe.msgprint('Book is not available');
+                    frappe.validated = false;
+                }
+            }
+        })
+    },
     onload: function(frm) {
         frappe.call({
             method: 'library_system.services.rest.enabled',

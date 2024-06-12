@@ -2,6 +2,7 @@ import frappe
 from frappe.model.document import Document
 from frappe.utils import add_days, today
 from datetime import datetime, timedelta
+from frappe.utils.background_jobs import enqueue
 import datetime as dt
 
 @frappe.whitelist(allow_guest=True)
@@ -21,6 +22,16 @@ def enabled():
 
     return "Enabled field updated successfully"
 enabled()
+
+def schedule_update():
+    enqueue(method=enabled, queue='short', interval=1, now=True)
+
+schedule_update()
+
+@frappe.whitelist(allow_guest=True)
+def is_book_available(docname):
+    given_book = frappe.get_doc("Book", docname)
+    return given_book.status
 
 @frappe.whitelist(allow_guest=True)
 def apply_penalty_and_blacklist(docname):
