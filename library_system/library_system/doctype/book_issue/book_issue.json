@@ -16,18 +16,21 @@
   {
    "fieldname": "book",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Book",
    "options": "Book"
   },
   {
    "fieldname": "library_member",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Library Member",
    "options": "LIbrary Member"
   },
   {
    "fieldname": "issue_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Issue Date"
   },
   {
@@ -39,13 +42,14 @@
    "default": "0",
    "fieldname": "extended",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "Extended",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 10:11:43.880673",
+ "modified": "2024-06-12 13:12:23.889437",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Book Issue",
@@ -61,6 +65,18 @@
    "read": 1,
    "report": 1,
    "role": "System Manager",
+   "share": 1,
+   "write": 1
+  },
+  {
+   "create": 1,
+   "delete": 1,
+   "email": 1,
+   "export": 1,
+   "print": 1,
+   "read": 1,
+   "report": 1,
+   "role": "Guest",
    "share": 1,
    "write": 1
   }
