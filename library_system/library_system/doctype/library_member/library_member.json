@@ -17,17 +17,20 @@
   {
    "fieldname": "first_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "First Name",
    "unique": 1
   },
   {
    "fieldname": "last_name",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Last Name"
   },
   {
    "fieldname": "email",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Email"
   },
   {
@@ -38,6 +41,7 @@
   {
    "fieldname": "penalty",
    "fieldtype": "Currency",
+   "in_list_view": 1,
    "label": "Penalty",
    "read_only": 1
   },
@@ -45,13 +49,14 @@
    "default": "0",
    "fieldname": "blacklisted",
    "fieldtype": "Check",
+   "in_list_view": 1,
    "label": "BlackListed",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 15:20:58.159450",
+ "modified": "2024-06-12 17:46:28.237747",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "LIbrary Member",

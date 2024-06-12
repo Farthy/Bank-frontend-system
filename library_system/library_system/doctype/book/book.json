@@ -1,6 +1,7 @@
 {
  "actions": [],
  "allow_rename": 1,
+ "autoname": "field:title",
  "creation": "2024-06-12 07:10:11.489797",
  "doctype": "DocType",
  "engine": "InnoDB",
@@ -14,32 +15,38 @@
   {
    "fieldname": "title",
    "fieldtype": "Data",
-   "label": "Title"
+   "in_list_view": 1,
+   "label": "Title",
+   "unique": 1
   },
   {
    "fieldname": "author",
    "fieldtype": "Link",
+   "in_list_view": 1,
    "label": "Author",
    "options": "Author"
   },
   {
    "fieldname": "isbn",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "ISBN"
   },
   {
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "available\nIssued"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 07:12:11.447217",
+ "modified": "2024-06-12 17:59:21.807349",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Book",
+ "naming_rule": "By fieldname",
  "owner": "Administrator",
  "permissions": [
   {

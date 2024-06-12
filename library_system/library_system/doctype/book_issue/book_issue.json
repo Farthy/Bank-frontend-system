@@ -2,7 +2,7 @@
  "actions": [],
  "allow_rename": 1,
  "autoname": "BI.###",
- "creation": "2024-06-12 07:13:13.148921",
+ "creation": "2024-06-12 18:34:49.683752",
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
@@ -36,6 +36,7 @@
   {
    "fieldname": "return_date",
    "fieldtype": "Date",
+   "in_list_view": 1,
    "label": "Return Date"
   },
   {
@@ -49,7 +50,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 13:12:23.889437",
+ "modified": "2024-06-12 18:51:14.526761",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Book Issue",

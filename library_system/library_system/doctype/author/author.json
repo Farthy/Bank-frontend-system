@@ -13,18 +13,20 @@
   {
    "fieldname": "name1",
    "fieldtype": "Data",
+   "in_list_view": 1,
    "label": "Name",
    "unique": 1
   },
   {
    "fieldname": "biography",
    "fieldtype": "Small Text",
+   "in_list_view": 1,
    "label": "Biography"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 07:37:08.757737",
+ "modified": "2024-06-12 17:51:14.038421",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Author",
