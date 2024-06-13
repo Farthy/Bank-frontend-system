@@ -34,7 +34,7 @@ def is_book_available(docname):
     return given_book.status
 
 @frappe.whitelist(allow_guest=True)
-def apply_penalty(docname):
+def apply_penalty_and_blacklist(docname):
     book_issue = frappe.get_doc("Book Issue", docname)
     penalty_amount_list = frappe.db.get_list("Library settings", fields=["penalty_amount"])
     penalty_amount = penalty_amount_list[0].get("penalty_amount")
@@ -50,24 +50,13 @@ def apply_penalty(docname):
     
     member = frappe.get_doc("LIbrary Member", book_issue.library_member)
     frappe.db.set_value("LIbrary Member", member.name, "penalty", penalty)
+   
+    if penalty > 100:
+        frappe.db.set_value("LIbrary Member", member.name, "blacklisted", 1)
 
     frappe.db.commit()
     
     member.reload()   
 
-    return member
-@frappe.whitelist(allow_guest=True)
-def blacklist():
-   members = frappe.get_all("LIbrary Member", fields=["name", "penalty", "blacklisted"])     
-   members_to_blacklist = [member for member in members if member.penalty > 100 and not member.blacklisted]
-            
-   for member in members_to_blacklist:
-            frappe.db.set_value("LIbrary Member", member.name, "blacklisted", 1)
-           
-   frappe.db.commit()   
-   for member in members_to_blacklist:
-            frappe.get_doc("LIbrary Member", member.name).reload()
-        
-   return members_to_blacklist
-
+    return member.blacklisted
     

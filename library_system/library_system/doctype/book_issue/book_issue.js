@@ -3,30 +3,34 @@
 
 frappe.ui.form.on('Book Issue', {
     refresh: function(frm) {
+        frm.clear_custom_buttons();
+    
         if (frm.doc.extended) {
-            frm.add_custom_button('Blacklist Member', () => {
+            frm.add_custom_button('Apply Penalty and Blacklist', () => {
                 frappe.call({
-                    method: "library_system.services.rest.blacklist",
-                    callback: function() {
-                        frm.reload_doc();
+                    method: "library_system.services.rest.apply_penalty_and_blacklist",
+                    args: {
+                        docname: frm.doc.name
+                    },
+                    callback: function(response) {
+                        if (response.message === 1) {
+                            frm.clear_custom_buttons();
+                            frm.add_custom_button('Unblacklist Member', () => {
+                                frappe.call({
+                                    method: "library_system.services.rest.unblacklist",
+                                    args: {
+                                        member_name: frm.doc.name
+                                    }
+                                });
+                            });
+                        }
                     }
                 });
             });
         }
-
-        
-
-    },
-    refresh: function(frm){
-        frappe.call({
-            method: 'library_system.services.rest.apply_penalty',
-            args: {
-                docname: frm.doc.name
-            },
-
-        })
-
-    },
+    }
+    
+,
     validate: function(frm) {
         frappe.call({
             method: "library_system.services.rest.is_book_available",
