@@ -4,12 +4,9 @@
 frappe.ui.form.on('Book Issue', {
     refresh: function(frm) {
         if (frm.doc.extended) {
-            frm.add_custom_button('Apply Penalty and Blacklist', () => {
+            frm.add_custom_button('Blacklist Member', () => {
                 frappe.call({
-                    method: "library_system.services.rest.apply_penalty_and_blacklist",
-                    args: {
-                        docname: frm.doc.name
-                    },
+                    method: "library_system.services.rest.blacklist",
                     callback: function() {
                         frm.reload_doc();
                     }
@@ -18,6 +15,16 @@ frappe.ui.form.on('Book Issue', {
         }
 
         
+
+    },
+    refresh: function(frm){
+        frappe.call({
+            method: 'library_system.services.rest.apply_penalty',
+            args: {
+                docname: frm.doc.name
+            },
+
+        })
 
     },
     validate: function(frm) {
