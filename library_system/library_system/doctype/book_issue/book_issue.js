@@ -28,11 +28,9 @@ frappe.ui.form.on('Book Issue', {
             },
             callback: function(response) {
                 if (response.message === 'available') {
-                    // Book is available
                     frappe.msgprint('Book is available');
                     frappe.validated = true;
                 } else {
-                    // Book is not available
                     frappe.msgprint('Book is not available');
                     frappe.validated = false;
                 }

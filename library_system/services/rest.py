@@ -45,18 +45,17 @@ def apply_penalty_and_blacklist(docname):
 
     
     if days_overdue > 0:
-        penalty = days_overdue * penalty_amount
-        
+     penalty = days_overdue * penalty_amount
     
-        member = frappe.get_doc("LIbrary Member", book_issue.library_member)
+    member = frappe.get_doc("LIbrary Member", book_issue.library_member)
+    frappe.db.set_value("LIbrary Member", member.name, "penalty", penalty)
+   
+    if penalty > 100:
         frappe.db.set_value("LIbrary Member", member.name, "blacklisted", 1)
-        frappe.db.set_value("LIbrary Member", member.name, "penalty", penalty)
 
-        frappe.db.commit()
-        
-        member = frappe.get_doc("LIbrary Member", book_issue.library_member)
-        member.reload()
+    frappe.db.commit()
+    
+    member.reload()   
 
-        return member
-
+    return member
     
