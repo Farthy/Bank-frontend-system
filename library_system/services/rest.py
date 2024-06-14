@@ -29,6 +29,19 @@ def schedule_update():
 schedule_update()
 
 @frappe.whitelist(allow_guest=True)
+def issue_book(docname):
+    book_issue = frappe.get_doc("Book Issue", docname)
+    book = frappe.get_doc("Book", {"title": book_issue.book})
+    
+    if book:
+        frappe.db.set_value("Book", book.name, "status", "Issued")
+    
+    frappe.db.commit()
+    book.reload()
+    return book
+
+
+@frappe.whitelist(allow_guest=True)
 def available_books():
    filters = {
         "status": "available"
@@ -55,7 +68,7 @@ def apply_penalty_and_blacklist(docname):
     member = frappe.get_doc("LIbrary Member", book_issue.library_member)
     frappe.db.set_value("LIbrary Member", member.name, "penalty", penalty)
    
-    if penalty > 100:
+    if penalty >= 100:
         frappe.db.set_value("LIbrary Member", member.name, "blacklisted", 1)
 
     frappe.db.commit()
@@ -77,8 +90,17 @@ def unblacklist(docname):
     frappe.db.set_value("Book Issue", book_issue.name, "return_date", today_date)
     frappe.db.set_value("Book Issue", book_issue.name, "extended", 0)
     
+    book = frappe.get_doc("Book", {"title": book_issue.book})
+    
+    if book:
+        frappe.db.set_value("Book", book.name, "status", "available")
+    
     frappe.db.commit()
     member.reload()
+    
+    return book
+
+
 @frappe.whitelist(allow_guest=True)
 def concatenate_fullname(member):
     new_member = frappe.get_doc("LIbrary Member", member)
