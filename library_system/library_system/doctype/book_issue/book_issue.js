@@ -1,6 +1,3 @@
-// Copyright (c) 2024, Farthy and contributors
-// For license information, please see license.txt
-
 frappe.ui.form.on('Book Issue', {
     refresh: function(frm) {
         frm.clear_custom_buttons();
@@ -28,25 +25,48 @@ frappe.ui.form.on('Book Issue', {
                 });
             });
         }
-    }
     
-,
-    validate: function(frm) {
+        // Call to load available books
         frappe.call({
-            method: "library_system.services.rest.is_book_available",
-            args: {
-                docname: frm.doc.book
-            },
+            method: "library_system.services.rest.available_books",
             callback: function(response) {
-                if (response.message === 'available') {
-                    frappe.msgprint('Book is available');
-                    frappe.validated = true;
+                var available_books = response.message;
+                console.log("Available books", available_books);
+                if (available_books && available_books.length > 0) {
+                    var options = available_books.map(book => book.name);
+                    frm.set_query("book", function() {
+                        return {
+                            filters: {
+                                name: ["in", options]
+                            }
+                        };
+                    });
                 } else {
-                    frappe.msgprint('Book is not available');
-                    frappe.validated = false;
+                    frm.set_query("book", function() {
+                        return {
+                            filters: {
+                                name: ["in", []]
+                            }
+                        };
+                    });
+                }
+            }
+        });
+    },
+    
+    before_save: function(frm){
+        frappe.call({
+            method: "library_system.services.rest.return_date",
+            args: {
+                issue_date: frm.doc.issue_date
+            },
+            callback: function(r) {
+                if(r.message) {
+                    frm.set_value('return_date', r.message);
                 }
             }
         })
+
     },
     onload: function(frm) {
         frappe.call({

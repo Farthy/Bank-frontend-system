@@ -37,7 +37,8 @@
    "fieldname": "return_date",
    "fieldtype": "Date",
    "in_list_view": 1,
-   "label": "Return Date"
+   "label": "Return Date",
+   "read_only": 1
   },
   {
    "default": "0",
@@ -50,7 +51,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 18:51:14.526761",
+ "modified": "2024-06-14 11:59:43.987677",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Book Issue",

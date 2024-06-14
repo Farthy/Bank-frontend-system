@@ -6,18 +6,24 @@
  "doctype": "DocType",
  "engine": "InnoDB",
  "field_order": [
-  "penalty_amount"
+  "penalty_amount",
+  "return_date"
  ],
  "fields": [
   {
    "fieldname": "penalty_amount",
    "fieldtype": "Currency",
    "label": "Penalty per day"
+  },
+  {
+   "fieldname": "return_date",
+   "fieldtype": "Data",
+   "label": "Return Date"
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 14:05:21.421018",
+ "modified": "2024-06-14 11:56:26.541569",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Library settings",

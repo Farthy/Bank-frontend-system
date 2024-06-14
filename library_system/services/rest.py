@@ -1,6 +1,6 @@
 import frappe
 from frappe.model.document import Document
-from frappe.utils import add_days, today
+from frappe.utils import add_days, today, getdate
 from datetime import datetime, timedelta
 from frappe.utils.background_jobs import enqueue
 import datetime as dt
@@ -29,9 +29,13 @@ def schedule_update():
 schedule_update()
 
 @frappe.whitelist(allow_guest=True)
-def is_book_available(docname):
-    given_book = frappe.get_doc("Book", docname)
-    return given_book.status
+def available_books():
+   filters = {
+        "status": "available"
+    }
+   fields = ["name", "title", "status"] 
+   books = frappe.get_all("Book", filters=filters, fields=fields)
+   return books
 
 @frappe.whitelist(allow_guest=True)
 def apply_penalty_and_blacklist(docname):
@@ -83,4 +87,20 @@ def concatenate_fullname(member):
     new_member.full_name = f"{first_name} {last_name}".strip()
     new_member.save()
 
+@frappe.whitelist(allow_guest=True)
+def return_date(issue_date):
+    settings = frappe.db.get_list("Library settings", fields=["return_date"])
     
+    if not settings or 'return_date' not in settings[0]:
+        frappe.throw("Return date setting not found")
+    
+    given_days = int(settings[0]['return_date'])
+    issue_date = getdate(issue_date)
+    return_date = add_days(issue_date, given_days)
+    
+    return return_date
+
+@frappe.whitelist(allow_guest=True)
+def if_extended(docname):
+    book_issue = frappe.get_doc("Book Issue", docname)
+    return book_issue
