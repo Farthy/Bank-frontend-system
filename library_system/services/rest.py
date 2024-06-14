@@ -59,4 +59,22 @@ def apply_penalty_and_blacklist(docname):
     member.reload()   
 
     return member.blacklisted
+@frappe.whitelist(allow_guest=True)
+def unblacklist(docname):
+    book_issue = frappe.get_doc("Book Issue", docname)
+    today_date_str = frappe.utils.today()
+    today_date = datetime.strptime(today_date_str, "%Y-%m-%d").date()
+    
+    member = frappe.get_doc("LIbrary Member", book_issue.library_member)
+    
+    frappe.db.set_value("LIbrary Member", member.name, "penalty", 0)
+    frappe.db.set_value("LIbrary Member", member.name, "blacklisted", 0)
+    
+    frappe.db.set_value("Book Issue", book_issue.name, "return_date", today_date)
+    frappe.db.set_value("Book Issue", book_issue.name, "extended", 0)
+    
+    frappe.db.commit()
+    member.reload()
+
+
     

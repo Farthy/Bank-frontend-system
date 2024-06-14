@@ -19,7 +19,7 @@ frappe.ui.form.on('Book Issue', {
                                 frappe.call({
                                     method: "library_system.services.rest.unblacklist",
                                     args: {
-                                        member_name: frm.doc.name
+                                        docname: frm.doc.name
                                     }
                                 });
                             });
