@@ -9,9 +9,11 @@
   "first_name",
   "last_name",
   "email",
+  "column_break_maky",
   "phone",
   "penalty",
-  "blacklisted"
+  "blacklisted",
+  "full_name"
  ],
  "fields": [
   {
@@ -46,17 +48,27 @@
    "read_only": 1
   },
   {
-   "default": "0",
+   "default": "No",
    "fieldname": "blacklisted",
    "fieldtype": "Check",
+   "label": "Blacklisted",
+   "read_only": 1
+  },
+  {
+   "fieldname": "column_break_maky",
+   "fieldtype": "Column Break"
+  },
+  {
+   "fieldname": "full_name",
+   "fieldtype": "Data",
    "in_list_view": 1,
-   "label": "BlackListed",
+   "label": "Full Name",
    "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-12 17:46:28.237747",
+ "modified": "2024-06-14 11:46:56.063522",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "LIbrary Member",

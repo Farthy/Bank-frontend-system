@@ -75,6 +75,12 @@ def unblacklist(docname):
     
     frappe.db.commit()
     member.reload()
-
+@frappe.whitelist(allow_guest=True)
+def concatenate_fullname(member):
+    new_member = frappe.get_doc("LIbrary Member", member)
+    first_name = new_member.first_name 
+    last_name = new_member.last_name 
+    new_member.full_name = f"{first_name} {last_name}".strip()
+    new_member.save()
 
     
