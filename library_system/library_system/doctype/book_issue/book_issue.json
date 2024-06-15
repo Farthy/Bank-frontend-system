@@ -53,6 +53,7 @@
    "default": "Pending",
    "fieldname": "status",
    "fieldtype": "Select",
+   "in_list_view": 1,
    "label": "Status",
    "options": "Complete\nPending",
    "read_only": 1
@@ -60,7 +61,7 @@
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-15 12:55:03.963111",
+ "modified": "2024-06-15 19:06:33.877073",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Book Issue",

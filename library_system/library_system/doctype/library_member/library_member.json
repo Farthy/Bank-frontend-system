@@ -13,7 +13,8 @@
   "phone",
   "penalty",
   "blacklisted",
-  "full_name"
+  "full_name",
+  "member_books"
  ],
  "fields": [
   {
@@ -37,13 +38,12 @@
   },
   {
    "fieldname": "phone",
-   "fieldtype": "Int",
+   "fieldtype": "Data",
    "label": "Phone"
   },
   {
    "fieldname": "penalty",
    "fieldtype": "Currency",
-   "in_list_view": 1,
    "label": "Penalty",
    "read_only": 1
   },
@@ -64,11 +64,18 @@
    "in_list_view": 1,
    "label": "Full Name",
    "read_only": 1
+  },
+  {
+   "fieldname": "member_books",
+   "fieldtype": "Table",
+   "label": "books",
+   "options": "Member Books",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-14 11:46:56.063522",
+ "modified": "2024-06-15 19:15:36.164016",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "LIbrary Member",

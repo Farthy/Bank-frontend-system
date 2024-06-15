@@ -11,12 +11,13 @@ def enabled():
     
     doc = frappe.get_list("Book Issue", filters={
         'return_date': ('<', today)
-    }, fields=['name','return_date']) 
+    }, fields=['name', 'return_date', 'status']) 
     for entry in doc:
-        if entry.get('return_date'):
-            frappe.db.set_value("Book Issue", entry['name'], "extended", 1)
-        else:
-            frappe.db.set_value("Book Issue", entry['name'], "extended", 0)
+        if entry.get('status') != 'Complete':
+            if entry.get('return_date'):
+                frappe.db.set_value("Book Issue", entry['name'], "extended", 1)
+            else:
+                frappe.db.set_value("Book Issue", entry['name'], "extended", 0)
 
     frappe.db.commit()
 
@@ -39,6 +40,14 @@ def validatingB4(docname):
     
     book.status = "Issued"
     book.save(ignore_permissions=True)
+    frappe.db.commit()
+    
+    library_member = frappe.get_doc("LIbrary Member", book_issue.library_member)
+    library_member.append("member_books", {
+        "book_title": book_issue.book,
+        "status": book_issue.status,
+    })
+    library_member.save(ignore_permissions=True)
     frappe.db.commit()
     
     settings = frappe.db.get_list("Library settings", fields=["return_date"])
@@ -102,6 +111,19 @@ def unblacklist(docname):
     
     frappe.db.set_value("Book Issue", book_issue.name, "return_date", today_date)
     frappe.db.set_value("Book Issue", book_issue.name, "extended", 0)
+    frappe.db.set_value("Book Issue", book_issue.name, "status", "Complete")
+    library_member = frappe.get_doc("LIbrary Member", book_issue.library_member)
+
+    member_books_to_remove = None
+    for entry in library_member.member_books:
+        if entry.book_title == book_issue.book:
+            member_books_to_remove = entry
+            break
+
+    if member_books_to_remove:
+        library_member.remove(member_books_to_remove)
+        library_member.save(ignore_permissions=True)
+        frappe.db.commit()
     
     book = frappe.get_doc("Book", {"title": book_issue.book})
     
@@ -110,6 +132,7 @@ def unblacklist(docname):
     
     frappe.db.commit()
     member.reload()
+    
     
     return book
 
@@ -122,19 +145,35 @@ def concatenate_fullname(member):
     new_member.full_name = f"{first_name} {last_name}".strip()
     new_member.save()
 
-# @frappe.whitelist(allow_guest=True)
-# def return_date(issue_date):
-#     settings = frappe.db.get_list("Library settings", fields=["return_date"])
-    
-#     if not settings or 'return_date' not in settings[0]:
-#         frappe.throw("Return date setting not found")
-    
-#     given_days = int(settings[0]['return_date'])
-#     issue_date = getdate(issue_date)
-#     return_date = add_days(issue_date, given_days)
-    
-#     return return_date
-
+@frappe.whitelist(allow_guest=True)
 def return_book(docname):
    book_issue = frappe.get_doc("Book Issue", docname)
+
+   today_date_str = frappe.utils.today()
+   today_date = datetime.strptime(today_date_str, "%Y-%m-%d").date()
+
+   frappe.db.set_value("Book Issue", book_issue.name, "return_date", today_date)
+   frappe.db.set_value("Book Issue", book_issue.name, "status", "Complete")
+
+   library_member = frappe.get_doc("LIbrary Member", book_issue.library_member)
+
+   member_books_to_remove = None
+   for entry in library_member.member_books:
+        if entry.book_title == book_issue.book:
+            member_books_to_remove = entry
+            break
+
+   if member_books_to_remove:
+        library_member.remove(member_books_to_remove)
+        library_member.save(ignore_permissions=True)
+        frappe.db.commit()
+
+   book = frappe.get_doc("Book", {"title": book_issue.book})
+    
+   if book:
+        frappe.db.set_value("Book", book.name, "status", "available")
+    
+   frappe.db.commit()
+   book.reload()
+   return book_issue.status
     

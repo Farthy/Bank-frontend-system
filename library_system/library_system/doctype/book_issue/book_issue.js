@@ -1,17 +1,6 @@
 frappe.ui.form.on('Book Issue', {
     refresh: function(frm) {
-        // frm.add_custom_button('Return Book', () => {
-        //     frappe.call({
-        //         method: "library_system.services.rest.return_book",
-        //         args: {
-        //             docname: frm.doc.name
-        //         },
-        //         callback: function(response){
 
-        //         }
-        //     })
-
-        // },
         frm.clear_custom_buttons();
     
         if (frm.doc.extended) {
@@ -36,9 +25,27 @@ frappe.ui.form.on('Book Issue', {
                     }
                 });
             });
+        } else {
+            frm.add_custom_button('Return Book', () => {
+                frappe.call({
+                    method: "library_system.services.rest.return_book",
+                    args: {
+                        docname: frm.doc.name
+
+                    },
+                    callback: function(response) {
+                        if (response.message === "Complete") {
+                            frm.clear_custom_buttons();
+                            frappe.msgprint('Book returned successfully');
+                        }
+                    }
+                })
+            })
+
         }
+
+        
     
-        // Call to load available books
         frappe.call({
             method: "library_system.services.rest.available_books",
             callback: function(response) {
@@ -64,6 +71,7 @@ frappe.ui.form.on('Book Issue', {
                 }
             }
         });
+        
     },
     
     before_save: function(frm){
