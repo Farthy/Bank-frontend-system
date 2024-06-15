@@ -1,5 +1,17 @@
 frappe.ui.form.on('Book Issue', {
     refresh: function(frm) {
+        // frm.add_custom_button('Return Book', () => {
+        //     frappe.call({
+        //         method: "library_system.services.rest.return_book",
+        //         args: {
+        //             docname: frm.doc.name
+        //         },
+        //         callback: function(response){
+
+        //         }
+        //     })
+
+        // },
         frm.clear_custom_buttons();
     
         if (frm.doc.extended) {
@@ -56,9 +68,9 @@ frappe.ui.form.on('Book Issue', {
     
     before_save: function(frm){
         frappe.call({
-            method: "library_system.services.rest.return_date",
+            method: "library_system.services.rest.validatingB4",
             args: {
-                issue_date: frm.doc.issue_date
+                docname: frm.doc.name
             },
             callback: function(r) {
                 if(r.message) {
@@ -67,15 +79,6 @@ frappe.ui.form.on('Book Issue', {
             }
         })
         
-
-    },
-    validate: function(frm){
-        frappe.call({
-            method: "library_system.services.rest.issue_book",
-            args: {
-               docname : frm.doc.name
-            }
-        })
 
     },
     onload: function(frm) {

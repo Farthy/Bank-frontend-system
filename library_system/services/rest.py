@@ -28,17 +28,30 @@ def schedule_update():
 
 schedule_update()
 
+
 @frappe.whitelist(allow_guest=True)
-def issue_book(docname):
+def validatingB4(docname):
     book_issue = frappe.get_doc("Book Issue", docname)
     book = frappe.get_doc("Book", {"title": book_issue.book})
     
-    if book:
-        frappe.db.set_value("Book", book.name, "status", "Issued")
+    if not book:
+        frappe.throw("Book not found")
     
+    book.status = "Issued"
+    book.save(ignore_permissions=True)
     frappe.db.commit()
-    book.reload()
-    return book
+    
+    settings = frappe.db.get_list("Library settings", fields=["return_date"])
+    
+    if not settings or 'return_date' not in settings[0]:
+        frappe.throw("Return date setting not found")
+    
+    given_days = int(settings[0]['return_date'])
+    issue_date = getdate(book_issue.issue_date)
+    return_date = add_days(issue_date, given_days)
+    
+    return return_date
+
 
 
 @frappe.whitelist(allow_guest=True)
@@ -109,20 +122,19 @@ def concatenate_fullname(member):
     new_member.full_name = f"{first_name} {last_name}".strip()
     new_member.save()
 
-@frappe.whitelist(allow_guest=True)
-def return_date(issue_date):
-    settings = frappe.db.get_list("Library settings", fields=["return_date"])
+# @frappe.whitelist(allow_guest=True)
+# def return_date(issue_date):
+#     settings = frappe.db.get_list("Library settings", fields=["return_date"])
     
-    if not settings or 'return_date' not in settings[0]:
-        frappe.throw("Return date setting not found")
+#     if not settings or 'return_date' not in settings[0]:
+#         frappe.throw("Return date setting not found")
     
-    given_days = int(settings[0]['return_date'])
-    issue_date = getdate(issue_date)
-    return_date = add_days(issue_date, given_days)
+#     given_days = int(settings[0]['return_date'])
+#     issue_date = getdate(issue_date)
+#     return_date = add_days(issue_date, given_days)
     
-    return return_date
+#     return return_date
 
-@frappe.whitelist(allow_guest=True)
-def if_extended(docname):
-    book_issue = frappe.get_doc("Book Issue", docname)
-    return book_issue
+def return_book(docname):
+   book_issue = frappe.get_doc("Book Issue", docname)
+    

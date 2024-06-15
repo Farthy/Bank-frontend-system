@@ -10,7 +10,8 @@
   "library_member",
   "issue_date",
   "return_date",
-  "extended"
+  "extended",
+  "status"
  ],
  "fields": [
   {
@@ -47,11 +48,19 @@
    "in_list_view": 1,
    "label": "Extended",
    "read_only": 1
+  },
+  {
+   "default": "Pending",
+   "fieldname": "status",
+   "fieldtype": "Select",
+   "label": "Status",
+   "options": "Complete\nPending",
+   "read_only": 1
   }
  ],
  "index_web_pages_for_search": 1,
  "links": [],
- "modified": "2024-06-14 11:59:43.987677",
+ "modified": "2024-06-15 12:55:03.963111",
  "modified_by": "Administrator",
  "module": "Library System",
  "name": "Book Issue",
