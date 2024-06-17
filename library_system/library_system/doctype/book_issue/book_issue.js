@@ -35,8 +35,9 @@ frappe.ui.form.on('Book Issue', {
                     },
                     callback: function(response) {
                         if (response.message === "Complete") {
-                            frm.clear_custom_buttons();
                             frappe.msgprint('Book returned successfully');
+                            frm.clear_custom_buttons();
+                            
                         }
                     }
                 })

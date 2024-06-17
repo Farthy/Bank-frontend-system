@@ -97,7 +97,11 @@ def apply_penalty_and_blacklist(docname):
     
     member.reload()   
 
-    return member.blacklisted
+
+    if penalty > 0:
+       return 1
+    
+
 @frappe.whitelist(allow_guest=True)
 def unblacklist(docname):
     book_issue = frappe.get_doc("Book Issue", docname)
@@ -114,16 +118,16 @@ def unblacklist(docname):
     frappe.db.set_value("Book Issue", book_issue.name, "status", "Complete")
     library_member = frappe.get_doc("LIbrary Member", book_issue.library_member)
 
-    member_books_to_remove = None
+    member_books_to_update = None
     for entry in library_member.member_books:
-        if entry.book_title == book_issue.book:
-            member_books_to_remove = entry
-            break
+     if entry.book_title == book_issue.book:
+        member_books_to_update = entry
+        break
 
-    if member_books_to_remove:
-        library_member.remove(member_books_to_remove)
-        library_member.save(ignore_permissions=True)
-        frappe.db.commit()
+    if member_books_to_update:
+      member_books_to_update.status = 'Complete'
+      library_member.save(ignore_permissions=True)
+    frappe.db.commit()
     
     book = frappe.get_doc("Book", {"title": book_issue.book})
     
@@ -157,16 +161,16 @@ def return_book(docname):
 
    library_member = frappe.get_doc("LIbrary Member", book_issue.library_member)
 
-   member_books_to_remove = None
+   member_books_to_update = None
    for entry in library_member.member_books:
-        if entry.book_title == book_issue.book:
-            member_books_to_remove = entry
-            break
+     if entry.book_title == book_issue.book:
+        member_books_to_update = entry
+        break
 
-   if member_books_to_remove:
-        library_member.remove(member_books_to_remove)
-        library_member.save(ignore_permissions=True)
-        frappe.db.commit()
+     if member_books_to_update:
+      member_books_to_update.status = 'Complete'
+      library_member.save(ignore_permissions=True)
+     frappe.db.commit()
 
    book = frappe.get_doc("Book", {"title": book_issue.book})
     
@@ -176,4 +180,6 @@ def return_book(docname):
    frappe.db.commit()
    book.reload()
    return book_issue.status
+
+
     
