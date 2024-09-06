@@ -12,6 +12,7 @@ def enabled():
     doc = frappe.get_list("Book Issue", filters={
         'return_date': ('<', today)
     }, fields=['name', 'return_date', 'status']) 
+    print(f"\n\n\n\n{doc}\n\n\n")
     for entry in doc:
         if entry.get('status') != 'Complete':
             if entry.get('return_date'):
@@ -20,47 +21,7 @@ def enabled():
                 frappe.db.set_value("Book Issue", entry['name'], "extended", 0)
 
     frappe.db.commit()
-
     return "Enabled field updated successfully"
-enabled()
-
-def schedule_update():
-    enqueue(method=enabled, queue='short', interval=1, now=True)
-
-schedule_update()
-
-
-@frappe.whitelist(allow_guest=True)
-def validatingB4(docname):
-    book_issue = frappe.get_doc("Book Issue", docname)
-    book = frappe.get_doc("Book", {"title": book_issue.book})
-    
-    if not book:
-        frappe.throw("Book not found")
-    
-    book.status = "Issued"
-    book.save(ignore_permissions=True)
-    frappe.db.commit()
-    
-    library_member = frappe.get_doc("LIbrary Member", book_issue.library_member)
-    library_member.append("member_books", {
-        "book_title": book_issue.book,
-        "status": book_issue.status,
-    })
-    library_member.save(ignore_permissions=True)
-    frappe.db.commit()
-    
-    settings = frappe.db.get_list("Library settings", fields=["return_date"])
-    
-    if not settings or 'return_date' not in settings[0]:
-        frappe.throw("Return date setting not found")
-    
-    given_days = int(settings[0]['return_date'])
-    issue_date = getdate(book_issue.issue_date)
-    return_date = add_days(issue_date, given_days)
-    
-    return return_date
-
 
 
 @frappe.whitelist(allow_guest=True)
