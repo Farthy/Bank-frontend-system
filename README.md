@@ -20,6 +20,7 @@ This app uses `pre-commit` for code formatting and linting. Please [install pre-
 cd apps/library_system
 pre-commit install
 ```
+![Screenshot from 2024-09-06 21-21-35](https://github.com/user-attachments/assets/32d5ff61-6639-4882-bea9-1dfb40d8cf01)
 
 Pre-commit is configured to use the following tools for checking and formatting your code:
 
