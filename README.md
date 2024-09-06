@@ -26,6 +26,7 @@ Pre-commit is configured to use the following tools for checking and formatting 
 - ruff
 - eslint
 - prettier
+  file:///home/farthy/Pictures/Screenshots/Screenshot%20from%202024-09-06%2021-21-35.png
 - pyupgrade
 
 ### License
