@@ -36,6 +36,9 @@ pre-commit install
 ![Screenshot from 2024-09-07 08-33-59](https://github.com/user-attachments/assets/282d3544-bdf3-47f1-b3f0-ccb5394d5b69)
 
 
+
+When the library member is issued with the book and delays to return the book(Extends) the extended checkbox is marked and the custom button penalize and blacklist appears, when it is clicked, the penalty applies to the library member
+
 ![Screenshot from 2024-09-07 08-34-16](https://github.com/user-attachments/assets/77086ac6-e7af-4b96-abd6-34977cd8f394)
 
 Pre-commit is configured to use the following tools for checking and formatting your code:
