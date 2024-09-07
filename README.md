@@ -32,6 +32,8 @@ pre-commit install
 
 ![Screenshot from 2024-09-06 21-19-02](https://github.com/user-attachments/assets/9424a72c-f117-4b40-a5a4-ebd6b5d5815b)
 
+When a book is issued the Return button is displayed, when it is clicked when the member has not extended then book is returned successfully, but if there is penalty uv to pay first before ur allowed to return the book. The status is pending. Remember the Return date is populated automatically, after 5 days of book issue, which is taken from the Library Settings
+
 
 ![Screenshot from 2024-09-07 08-33-59](https://github.com/user-attachments/assets/282d3544-bdf3-47f1-b3f0-ccb5394d5b69)
 
