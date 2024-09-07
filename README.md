@@ -28,6 +28,8 @@ There is a child table for the Library Member where his/her books history is kep
 
 ![Screenshot from 2024-09-06 21-20-25](https://github.com/user-attachments/assets/abf75d14-2e68-4696-a334-f1f79b73b447)
 
+When the book is out of stock, it is not displayed in the list when creating a new issue, only available books are listed. and when a book is returned from the library member it status becomes available, 
+
 ![Screenshot from 2024-09-06 21-19-45](https://github.com/user-attachments/assets/1ce5bd71-9068-4fc0-b5b3-9578f0cb82b3)
 
 
