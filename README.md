@@ -29,6 +29,10 @@ pre-commit install
 
 ![Screenshot from 2024-09-06 21-19-45](https://github.com/user-attachments/assets/1ce5bd71-9068-4fc0-b5b3-9578f0cb82b3)
 
+
+![Screenshot from 2024-09-06 21-19-02](https://github.com/user-attachments/assets/9424a72c-f117-4b40-a5a4-ebd6b5d5815b)
+
+
 Pre-commit is configured to use the following tools for checking and formatting your code:
 
 - ruff
